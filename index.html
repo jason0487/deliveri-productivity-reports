@@ -1,0 +1,385 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Human Era vs Minions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column; three era columns recur in every table (Human, Transition, Minions) with the multiplier last. Chips mark measured vs estimated. */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --ink:#18212b; --muted:#5a6673; --rule:#dde2e8;
+  --accent:#1f5f8b; --accent-soft:#e3eef6; --human:#7a6a52; --human-soft:#f1ece4;
+  --exact:#1d6b47; --exact-bg:#e2f2e9; --est:#8a5a00; --est-bg:#fbefd6; --na:#5a6673; --na-bg:#eceff2; --warn:#a33a2a; --warn-bg:#fbe7e3;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161c; --surface:#18202a; --ink:#e4e9ef; --muted:#9aa6b3; --rule:#2a3540;
+  --accent:#7fb4dc; --accent-soft:#1c2e3d; --human:#cdb894; --human-soft:#2d2820;
+  --exact:#7fd1a6; --exact-bg:#16332a; --est:#e8c06a; --est-bg:#3a2e14; --na:#a5b0bc; --na-bg:#26303a; --warn:#f0998a; --warn-bg:#3d211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161c; --surface:#18202a; --ink:#e4e9ef; --muted:#9aa6b3; --rule:#2a3540;
+  --accent:#7fb4dc; --accent-soft:#1c2e3d; --human:#cdb894; --human-soft:#2d2820;
+  --exact:#7fd1a6; --exact-bg:#16332a; --est:#e8c06a; --est-bg:#3a2e14; --na:#a5b0bc; --na-bg:#26303a; --warn:#f0998a; --warn-bg:#3d211d; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:40px 80px;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:2.4rem;font-weight:600}
+h2{font-size:1.55rem;font-weight:600;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0;max-width:74ch}
+section{display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lede{color:var(--muted);font-size:1.02rem}
+.chip{display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.04em;padding:1px 6px;border-radius:3px;vertical-align:1px;white-space:nowrap}
+.ex{color:var(--exact);background:var(--exact-bg)} .es{color:var(--est);background:var(--est-bg)} .na{color:var(--na);background:var(--na-bg)}
+.fh{color:var(--human);background:var(--human-soft)} .fm{color:var(--accent);background:var(--accent-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--muted)}
+.eras{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.era{background:var(--surface);border:1px solid var(--rule);padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.era .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.era.h .k{color:var(--human)} .era.t .k{color:var(--muted)} .era.m .k{color:var(--accent)}
+.era .d{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.era p{font-size:.86rem;color:var(--muted)}
+.callout{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--warn);padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.callout ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+thead th{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--bg);white-space:nowrap}
+thead th.h{color:var(--human)} thead th.m{color:var(--accent)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:.84rem;white-space:nowrap}
+td.x{text-align:right;font-family:var(--mono);font-size:.84rem;font-weight:500;color:var(--accent);white-space:nowrap}
+td.x.dim{color:var(--muted);font-weight:400}
+tr.group td{background:var(--accent-soft);font-family:var(--display);font-weight:600;font-size:.92rem;color:var(--accent)}
+tbody tr:last-child td{border-bottom:0}
+.sub{display:block;color:var(--muted);font-size:.76rem;font-family:var(--body);font-weight:400}
+.notes{display:flex;flex-direction:column;gap:8px;font-size:.9rem;color:var(--muted)}
+.notes p{max-width:none}
+.notes b{color:var(--ink);font-weight:600}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.vs{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:600;font-variant-numeric:tabular-nums}
+.vs .a{font-size:1.5rem;color:var(--human)} .vs .b{font-size:2.2rem;color:var(--accent);line-height:1} .vs .arrow{color:var(--muted);font-size:1.1rem}
+.card p{font-size:.9rem}
+.card .how{color:var(--muted);font-size:.82rem}
+.bars{background:var(--surface);border:1px solid var(--rule);padding:18px 16px 12px;overflow-x:auto}
+.bars .plot{display:grid;grid-template-columns:repeat(26,minmax(18px,1fr));gap:4px;align-items:end;height:150px;min-width:560px;border-bottom:1px solid var(--rule);background-image:linear-gradient(to top,var(--rule) 1px,transparent 1px);background-size:100% 25px}
+.bars .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;height:100%}
+.bars .bar{width:100%;background:var(--human);border-radius:2px 2px 0 0}
+.bars .v{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+.bars .lbls{display:grid;grid-template-columns:repeat(26,minmax(18px,1fr));gap:4px;min-width:560px;padding-top:6px}
+.bars .lbls span{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:center;white-space:nowrap}
+.bars .cap{font-size:.8rem;color:var(--muted);padding-top:10px}
+ul.feat{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:.9rem}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.cols>div{min-width:0;display:flex;flex-direction:column;gap:10px}
+code{font-family:var(--mono);font-size:.82em;background:var(--na-bg);padding:0 4px;border-radius:3px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){h1{font-size:1.9rem}.wrap{padding-inline:16px;padding-block:28px 60px}}
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:14px">
+  <span class="eyebrow">Deliveri engineering · comparison as of 2026-10-08</span>
+  <h1>Human Era vs Minions</h1>
+  <p class="lede">Before-and-after productivity for Deliveri, measured across all 37 company GitHub repositories, Jira (DLC and GEN) and GitHub Actions. Written for an audience of engineering leaders, so the comparison favors fairness over a dramatic number.</p>
+  <div class="legend">
+    <span><span class="chip ex">EXACT</span> measured from a system of record</span>
+    <span><span class="chip es">EST</span> estimated, method stated</span>
+    <span><span class="chip na">N/A</span> could not be measured</span>
+  </div>
+</header>
+
+<section id="periods">
+  <h2>Dates used, and why there are three periods</h2>
+  <div class="eras">
+    <div class="era h"><span class="k">Human era</span><span class="d">2024-04-26 → 2026-05-29</span><p>109 weeks. The first commit in any company repo is 2024-04-26. Nothing exists between 1 Jan 2024 and then, so per-week averages start at the first commit. The era ends with the last engineer's final commit on 2026-05-29.</p></div>
+    <div class="era t"><span class="k">Transition</span><span class="d">2026-05-30 → 2026-08-26</span><p>12.6 weeks. No engineers. The two directors worked hands-on, and from 2026-06-10 drove Claude Code directly, without the Minions harness. This period is reported separately and kept out of the main comparison.</p></div>
+    <div class="era m"><span class="k">Minions era</span><span class="d">2026-08-26 10:32 ET → today</span><p>6.2 weeks. Starts at commit <code>8fafb458d</code>, "install the Minions framework" (DLC-611). The first Minions run and the first autopilot batch followed within a day.</p></div>
+  </div>
+  <div class="notes">
+    <p><b>Why not June 2026?</b> June is when Claude Code started: the first agent co-authored commits by the directors are dated 2026-06-10. The Minions harness itself was installed on 2026-08-26. If the human era ran up to the Minions cutover, it would include 12 weeks of AI-agent work, and the "human" baseline would no longer be human. The literal version is still given at the end for completeness.</p>
+  </div>
+</section>
+
+<section>
+  <div class="callout">
+    <h3>Read before you post</h3>
+    <ul>
+      <li><b>Most of the jump happened before Minions.</b> Agent-assisted work without the harness (the transition) already completed about 22 tickets a week. Minions raised that to about 29 tickets a week, with GEN adding a second product line. "AI agents vs our old team" and "Minions vs plain Claude Code" are different claims.</li>
+      <li><b>The human team shrank to one engineer for its last year.</b> From May 2025 to May 2026, one engineer made 97% of the commits. Two-year averages mix a 4 to 6 person period with a solo period.</li>
+      <li><b>The units changed.</b> The human team committed straight to <code>develop</code> and used PRs mainly to promote releases (131 of 253 merged PRs). Minions opens one PR per ticket and squashes on merge. Commits and PRs are not like-for-like.</li>
+      <li><b>"Complete" means UAT or Done</b>: code finished and deployed to dev, for both DLC and GEN. Production releases are batched by choice and are not used as a productivity measure.</li>
+      <li><b>The Minions era is 6 weeks long</b> and includes a planned build-out of the internal Genesis admin app. Six weeks against two years is a short sample.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="side">
+  <h2>Side by side, per week</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Per week</th><th class="n h">Human era</th><th class="n">Transition</th><th class="n m">Minions</th><th class="n">Minions ÷ human</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr class="group"><td colspan="6">Output</td></tr>
+      <tr><td>Tickets completed (UAT or Done), DLC + GEN</td><td class="n">1.97 <span class="sub">157 ÷ 79.6 wk*</span></td><td class="n">22.2</td><td class="n">29.4 <span class="sub">DLC 18.4 · GEN 11.0</span></td><td class="x">15×</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;Feature and capability tickets (Story + Task)</td><td class="n">1.55</td><td class="n">17.6</td><td class="n">22.5</td><td class="x">14.5×</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;Bug tickets</td><td class="n">0.43</td><td class="n">4.6</td><td class="n">7.0</td><td class="x">16×</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>PRs merged, all</td><td class="n">2.32</td><td class="n">21.9</td><td class="n">36.7</td><td class="x">16×</td><td><span class="chip ex">EXACT</span> different PR habits</td></tr>
+      <tr><td>Feature/task PRs merged (no release or roll-up PRs)</td><td class="n">0.87</td><td class="n">20.8</td><td class="n">33.3</td><td class="x dim">38×, don't quote</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Commits, all branches and PR refs</td><td class="n">28.9</td><td class="n">53.7</td><td class="n">108.1</td><td class="x">3.7×</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Commits on trunk branches</td><td class="n">28.4</td><td class="n">47.0</td><td class="n">19.9</td><td class="x dim">0.7×</td><td><span class="chip ex">EXACT</span> squash habit</td></tr>
+      <tr><td>Source lines added</td><td class="n">2,268</td><td class="n">8,891</td><td class="n">15,025</td><td class="x">6.6×</td><td><span class="chip ex">EXACT</span> filtered</td></tr>
+      <tr><td>Source lines removed</td><td class="n">822</td><td class="n">2,266</td><td class="n">1,725</td><td class="x">2.1×</td><td><span class="chip ex">EXACT</span> filtered</td></tr>
+      <tr class="group"><td colspan="6">Speed (medians, not per week)</td></tr>
+      <tr><td>Ticket In Progress → complete</td><td class="n">15.2 h</td><td class="n">4.3 h</td><td class="n">3.3 h</td><td class="x">4.6× faster</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Ticket created → complete</td><td class="n">4.3 d</td><td class="n">0.8 d</td><td class="n">7.5 d</td><td class="x dim">slower, planned backlog</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Feature PR opened → merged</td><td class="n">0.8 h</td><td class="n">0.4 h</td><td class="n">0.8 h</td><td class="x dim">no change</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr class="group"><td colspan="6">Quality</td></tr>
+      <tr><td>Test cases added</td><td class="n">0.51</td><td class="n">~186</td><td class="n">1,242</td><td class="x dim">~2,400×, quote absolutes</td><td><span class="chip ex">EXACT</span> <span class="chip es">EST</span> transition</td></tr>
+      <tr><td>Reverts + hotfixes per merged PR</td><td class="n">4.0%</td><td class="n">0.4%</td><td class="n">1.3%</td><td class="x">3× lower</td><td><span class="chip ex">EXACT</span> label-based</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p><b>"Complete" means UAT or Done:</b> the code is finished and deployed to dev. A ticket counts at its first move to UAT, or at Done if it skipped UAT. Epics and Won't Do tickets are excluded. GEN tickets are included everywhere. The GEN project only started during the Minions era, so all 68 completed GEN tickets fall there.</p>
+    <p>* Human-era Jira rates use the weeks Jira existed (from 2024-11-25, 79.6 weeks), not the full 109. Even so, Jira was barely used from June to December 2025, so the human rate is understated. Minions era: 6.18 weeks. Transition: 12.6 weeks.</p>
+    <p><b>Production releases are left out of the productivity comparison on purpose.</b> Releases are now batched because each one carries far more work to test, so release count no longer tracks output. For reference: about 0.59 a week in the human era (est.) and 0.65 a week under Minions.</p>
+    <p><b>Created → complete got slower</b> because Minions works from a backlog planned weeks in advance; GEN tickets were filed in bulk and built 1 to 3 weeks later. In Progress → complete is the build-time comparison, and the human era has the same status history for it (n = 131 human, 134 Minions).</p>
+  </div>
+</section>
+
+<section id="top3">
+  <h2>Three comparisons that hold up</h2>
+  <div class="grid3">
+    <div class="card">
+      <span class="eyebrow">Testing</span>
+      <div class="vs"><span class="a">56</span><span class="arrow">→</span><span class="b">7,673</span></div>
+      <p>Automated test cases: 56 written in two years of the human era, 7,673 added in the first six weeks on Minions.</p>
+      <p class="how">Static count of test declarations across every repo at the human era's end, with duplicate files removed, against the monorepo's own count. Quote both absolute numbers, not a multiplier. A ratio this large reads as a gimmick, and the honest story is that the old codebase had almost no tests.</p>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Tickets completed</span>
+      <div class="vs"><span class="a">2.0</span><span class="arrow">→</span><span class="b">29.4</span></div>
+      <p>Tickets completed per week across the customer app and the Genesis admin app: 15× the human-era rate. Feature and capability tickets alone rose from 1.6 to 22.5 a week (14.5×).</p>
+      <p class="how">Complete means the code is done and deployed to dev (UAT or Done), from Jira status history. Ticket size is the open question, because Minions plans work as smaller slices. Say so.</p>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Build time per ticket</span>
+      <div class="vs"><span class="a">15.2 h</span><span class="arrow">→</span><span class="b">3.3 h</span></div>
+      <p>Median time from a ticket being started to the code being complete, 4.6× faster.</p>
+      <p class="how">Both eras used the same Jira "In Progress" status, so this is a like-for-like measure (131 human tickets, 134 Minions tickets). It covers only time in progress. Minions also works several tickets in parallel.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <p><b>Also defensible:</b> source code added per week went from 2,268 to 15,025 lines (6.6×), excluding tests, lockfiles, generated files, migrations, build output and vendored code. The counting method favors the human era, because their lines are summed commit by commit while Minions' come from squash merges.</p>
+    <p><b>Avoid quoting:</b> commit counts (the squash habit cuts them on trunk), PR multipliers (the human team used PRs for releases), and the 2,400× test ratio.</p>
+  </div>
+</section>
+
+<section id="output">
+  <h2>Output: totals and per week</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Total (per week)</th><th class="n h">Human era · 109 wk</th><th class="n">Transition · 12.6 wk</th><th class="n m">Minions · 6.2 wk</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td>Tickets completed (UAT or Done)</td><td class="n">157 <span class="sub">1.97/wk on Jira weeks</span></td><td class="n">280 <span class="sub">22.2/wk</span></td><td class="n">182 <span class="sub">29.4/wk</span></td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;DLC (customer app) / GEN (Genesis)</td><td class="n">157 / —</td><td class="n">280 / —</td><td class="n">114 / 68</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;Story / Task / Bug</td><td class="n">117 / 6 / 34</td><td class="n">3 / 219 / 58</td><td class="n">51 / 88 / 43</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;GEN: Story / Task</td><td class="n">—</td><td class="n">—</td><td class="n">42 / 26</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>PRs opened</td><td class="n">265 <span class="sub">2.43/wk</span></td><td class="n">287 <span class="sub">22.8/wk</span></td><td class="n">228 <span class="sub">36.9/wk</span></td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>PRs merged</td><td class="n">253 <span class="sub">2.32/wk</span></td><td class="n">276 <span class="sub">21.9/wk</span></td><td class="n">227 <span class="sub">36.7/wk</span></td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;release PRs (develop → prod/main)</td><td class="n">131</td><td class="n">14</td><td class="n">0</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>&nbsp;&nbsp;feature/task PRs</td><td class="n">95</td><td class="n">262</td><td class="n">206</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Commits (deduplicated, non-merge, all refs)</td><td class="n">3,158 <span class="sub">28.9/wk</span></td><td class="n">677 <span class="sub">53.7/wk</span></td><td class="n">668 <span class="sub">108.1/wk</span></td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Production releases (context only)</td><td class="n">~64 <span class="sub">~0.59/wk</span></td><td class="n">~13 <span class="sub">~1.0/wk</span></td><td class="n">4 <span class="sub">0.65/wk</span></td><td><span class="chip es">EST</span> human and transition, <span class="chip ex">EXACT</span> Minions</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p><b>Jira types:</b> the human team filed features as Story. Agent-era DLC work is mostly filed as Task, including feature slices, so "Story + Task" is the fair feature count. Jira only starts on 2024-11-25, so the first seven months of the human era have no ticket record.</p>
+    <p><b>Production releases are context, not a productivity measure.</b> Releases are batched on purpose so the larger volume of work can be tested before each one. Human-era releases <span class="chip es">EST</span> are the distinct days on which a develop → prod/main release PR merged in any repo (64 days across 131 release PRs). GitHub Actions has no production deploy runs for that period.</p>
+  </div>
+
+  <h3>Notable features</h3>
+  <div class="cols">
+    <div>
+      <span class="eyebrow">Human era · the biggest</span>
+      <ul class="feat">
+        <li>The core shipping product: create shipment, rates and label purchase across carriers</li>
+        <li>Shopify store connection and order import</li>
+        <li>UPS domestic integration: OAuth, account enrollment, rating, labels (2026)</li>
+        <li>USPS pickup scheduling: eligibility, request, edit, cancel</li>
+        <li>Stripe payments</li>
+        <li>Insurance engine, plus fuel and large-package surcharges</li>
+        <li>DHL rates, duties and taxes for international orders</li>
+        <li>Google sign-in, session expiry and token refresh</li>
+        <li>Address directory and Google Maps address validation and autofill</li>
+        <li>Shipments homepage table, filters, bulk delete and archive</li>
+        <li>HubSpot order sync</li>
+        <li>Move of the backend to a monorepo of Lambdas, plus a Go service</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow">Minions era</span>
+      <ul class="feat">
+        <li>Genesis internal admin app: sign-in, order page, orders list, staff actions, USPS pickups</li>
+        <li>Courier Estimated Delivery Date and Delivered On on orders</li>
+        <li>Security hardening: token-checked API, own-business label purchases, no account enumeration at sign-in</li>
+        <li>Sign-up rework: phone entry with dial codes, business address step</li>
+        <li>True 4" × 6" UPS labels, and carrier field limits checked before payment</li>
+        <li>Protection against buying a second label when saving the first one fails</li>
+        <li>Permanent reference IDs, per-label records, time-zone-safe timestamps</li>
+        <li>Batched production release process with a release queue</li>
+      </ul>
+    </div>
+  </div>
+  <div class="notes"><p>The human-era list is drawn from completed Jira stories and epics, plus the most frequent themes in commit messages. The Minions-era list is drawn from <code>CHANGELOG.md</code>. Neither list is a measure of size.</p></div>
+</section>
+
+<section id="speed">
+  <h2>Speed</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Median</th><th class="n h">Human era</th><th class="n">Transition</th><th class="n m">Minions</th></tr></thead>
+    <tbody>
+      <tr><td>Ticket In Progress → complete</td><td class="n">15.2 h <span class="sub">n = 131</span></td><td class="n">4.3 h <span class="sub">n = 208</span></td><td class="n">3.3 h <span class="sub">n = 134</span></td></tr>
+      <tr><td>Ticket created → complete</td><td class="n">4.3 d <span class="sub">n = 157</span></td><td class="n">0.8 d <span class="sub">n = 280</span></td><td class="n">7.5 d <span class="sub">n = 182</span></td></tr>
+      <tr><td>Feature/task PR opened → merged</td><td class="n">0.8 h <span class="sub">n = 95</span></td><td class="n">0.4 h <span class="sub">n = 262</span></td><td class="n">0.8 h <span class="sub">n = 206</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p>All <span class="chip ex">EXACT</span>. <b>PR merge time didn't change because PRs were never a review gate.</b> Human-era PRs were mostly self-merged in minutes, and Minions task PRs are merged by an agent into an integration branch. <b>In Progress → complete is the like-for-like build-time measure</b>: both eras used the same Jira statuses, and Minions is 4.6× faster. Created → complete is longer under Minions because tickets are planned weeks ahead and then built in batches. That measures how far ahead the backlog is planned, not how fast work gets done.</p>
+  </div>
+</section>
+
+<section id="quality">
+  <h2>Quality</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Measure</th><th class="n h">Human era</th><th class="n">Transition</th><th class="n m">Minions</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td>Test cases at end of period</td><td class="n">56 <span class="sub">39 test files</span></td><td class="n">2,405</td><td class="n">10,078</td><td><span class="chip ex">EXACT</span> static count</td></tr>
+      <tr><td>Test cases added</td><td class="n">56</td><td class="n">~2,349</td><td class="n">7,673</td><td><span class="chip ex">EXACT</span> <span class="chip es">EST</span> transition</td></tr>
+      <tr><td>Revert commits on trunk</td><td class="n">2</td><td class="n">1</td><td class="n">1</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Hotfix commits/PRs (by name)</td><td class="n">8</td><td class="n">0</td><td class="n">2</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Per merged PR</td><td class="n">4.0%</td><td class="n">0.4%</td><td class="n">1.3%</td><td><span class="chip ex">EXACT</span></td></tr>
+      <tr><td>Production rollbacks</td><td class="n">N/A</td><td class="n">N/A</td><td class="n">0</td><td><span class="chip na">N/A</span> no human-era deploy records</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p><b>Test counts</b> are the number of <code>it(</code>/<code>test(</code> and <code>func Test</code> declarations in test files. The human-era figure scans the last trunk state before 2026-05-30 in every repo, and identical files copied between repos are counted once. Of the 56, 20 are in the backend, some from May 2026 work that was itself AI-assisted (see below). The transition figure is the monorepo's count at the cutover minus 56, which is approximate because the code moved between repos.</p>
+    <p><b>Reverts and hotfixes</b> are matched on names ("revert…", "hotfix"), so they depend on labelling habits. The human team used "hotfix" loosely, often for styling fixes, which may overstate their rate. Neither era records the actual regressions. The per-PR rate also uses different PR units (see Output).</p>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Team</h2>
+  <div class="bars" role="img" aria-label="Active human committers per month, April 2024 to May 2026">
+    <div class="plot">
+      <div class="col"><span class="v">2</span><div class="bar" style="height:33%"></div></div>
+      <div class="col"><span class="v">6</span><div class="bar" style="height:100%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">3</span><div class="bar" style="height:50%"></div></div>
+      <div class="col"><span class="v">3</span><div class="bar" style="height:50%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">2</span><div class="bar" style="height:33%"></div></div>
+      <div class="col"><span class="v">3</span><div class="bar" style="height:50%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">4</span><div class="bar" style="height:67%"></div></div>
+      <div class="col"><span class="v">3</span><div class="bar" style="height:50%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">1</span><div class="bar" style="height:17%"></div></div>
+      <div class="col"><span class="v">3</span><div class="bar" style="height:50%"></div></div>
+    </div>
+    <div class="lbls">
+      <span>A24</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span><span>J25</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span><span>J26</span><span>F</span><span>M</span><span>A</span><span>M</span>
+    </div>
+    <p class="cap">Distinct human committers per month, April 2024 to May 2026 <span class="chip ex">EXACT</span> after merging known aliases. 11 distinct people over the era. May 2026 includes the engineer, a short-term contributor, and a director.</p>
+  </div>
+
+  <h3>One engineer vs Minions</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Per week</th><th class="n h">Per engineer, human era</th><th class="n h">Solo-engineer year</th><th class="n m">Minions</th><th class="n">Minions ÷ one engineer</th></tr></thead>
+    <tbody>
+      <tr><td>Tickets completed (UAT or Done)</td><td class="n">1.0–1.3</td><td class="n">0.99</td><td class="n">29.4</td><td class="x">22–30×</td></tr>
+      <tr><td>&nbsp;&nbsp;Feature and capability tickets</td><td class="n">0.8–1.1</td><td class="n">0.75</td><td class="n">22.5</td><td class="x">20–30×</td></tr>
+      <tr><td>PRs merged (all)</td><td class="n">0.98–1.29</td><td class="n">1.71</td><td class="n">36.7</td><td class="x dim">21–37×, units differ</td></tr>
+      <tr><td>Commits (all refs)</td><td class="n">12.3–16.1</td><td class="n">12.1</td><td class="n">108.1</td><td class="x">7–9×</td></tr>
+      <tr><td>Source lines added</td><td class="n">963–1,263</td><td class="n">1,500</td><td class="n">15,025</td><td class="x">10–16×</td></tr>
+      <tr><td>Test cases added</td><td class="n">0.22–0.29</td><td class="n">~0</td><td class="n">1,242</td><td class="x dim">quote absolutes</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p><b>Per engineer</b> <span class="chip es">EST</span>: era totals divided by engineer-weeks. The low end assumes every person active in a month worked all of that month (257 engineer-weeks). The high end counts only weeks in which a person committed (196). Real effort is somewhere in between, because part-time and contract status isn't recorded. Ticket rates use the 117 commit-weeks inside the Jira period at the high end and about 153 at the low end (est.).</p>
+    <p><b>Solo-engineer year</b> <span class="chip ex">EXACT</span>: 2025-05-01 to 2026-05-29 (56.3 weeks). One engineer made 97% of the 681 commits, with a short-term contributor and a director making the rest. This is the cleanest one-engineer baseline, since it involves no team coordination. It also covers the period when Jira was barely used, which lowers its ticket rate.</p>
+    <p><b>The Minions column isn't zero people.</b> One director spends an estimated 22 to 47 hours a fortnight directing agents, about 35 at the midpoint (from the previous audit's session analysis). Per director-hour, the ratios are smaller than per engineer-week.</p>
+  </div>
+</section>
+
+<section id="loc">
+  <h2>Lines of code</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Added / removed</th><th class="n h">Human era</th><th class="n">Transition</th><th class="n m">Minions</th></tr></thead>
+    <tbody>
+      <tr><td>Source code</td><td class="n">+247,487 / −89,661</td><td class="n">+112,026 / −28,551</td><td class="n">+92,855 / −10,659</td></tr>
+      <tr><td>&nbsp;&nbsp;per week</td><td class="n">+2,268 / −822</td><td class="n">+8,891 / −2,266</td><td class="n">+15,025 / −1,725</td></tr>
+      <tr><td>Tests (shown separately)</td><td class="n">+2,702 / −116</td><td class="n">+56,973 / −2,717</td><td class="n">+194,307 / −3,103</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <p><span class="chip ex">EXACT</span> Sum of per-commit <code>numstat</code> over trunk-reachable, deduplicated, non-bot commits, with rename detection. <b>Excluded:</b> lockfiles; build output and vendored code (<code>node_modules</code>, <code>dist</code>, <code>build</code>, <code>.serverless</code>, <code>storybook-static</code>, source maps; 5.65M lines were committed in the human era, mostly <code>node_modules</code>); generated files (Swagger specs, changelog HTML/JSON, snapshots); migrations; binary assets; docs; agent run logs and agent framework files.</p>
+    <p><b>Inflation in the human era:</b> shared libraries were copied into many Lambda repos, and commits were not squashed, so churn counts twice. <b>Inflation in the transition:</b> two sync commits on 2026-07-18 imported about 26,000 lines from the old repos into the monorepo. <b>Minions:</b> tests outnumber source two to one, which is why they're shown separately.</p>
+  </div>
+</section>
+
+<section id="fairness">
+  <h2>What makes the comparison unfair</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Factor</th><th>Favors</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Greenfield vs mature codebase</td><td><span class="chip fm">MINIONS</span></td><td>Humans built the product from nothing: 30+ repos, carrier API certification, infrastructure. Minions works in an established monorepo with conventions, CI, and a written memory of past decisions. External carrier work is slow regardless of who does it.</td></tr>
+      <tr><td>Multi-repo overhead</td><td><span class="chip fm">MINIONS</span></td><td>Human-era work was split across 37 repos with separate deploys. The monorepo removed that overhead before Minions arrived (from 2026-06-12).</td></tr>
+      <tr><td>Team shrank to one engineer</td><td><span class="chip fm">MINIONS</span></td><td>Two-year averages include a solo year. The per-engineer figures above correct for this.</td></tr>
+      <tr><td>Quiet periods</td><td><span class="chip fm">MINIONS</span></td><td>September 2024 had 2 commits. Jira was nearly unused from June to December 2025. No repos existed from January to April 2024, which I excluded from the denominator.</td></tr>
+      <tr><td>Ticket size and Jira use</td><td><span class="chip fm">MINIONS</span></td><td>Minions plans work as many small tickets, Genesis especially. Human-era Stories are often larger. Jira only exists from 2024-11-25.</td></tr>
+      <tr><td>Short Minions sample</td><td><span class="chip fm">MINIONS</span></td><td>6.2 weeks of a planned build-out, against 109 weeks that include maintenance and slow periods.</td></tr>
+      <tr><td>Commit and squash habits</td><td><span class="chip fh">HUMAN</span></td><td>Humans committed small changes directly to develop. Minions squashes, so trunk commits fall (0.7×). Line counts sum human churn but only Minions' net change.</td></tr>
+      <tr><td>PRs used differently</td><td>Either</td><td>Human PRs were mostly release promotions. Minions has one PR per ticket plus batch roll-ups. Don't compare PR counts directly.</td></tr>
+      <tr><td>AI tools already in use</td><td><span class="chip fh">HUMAN</span></td><td>17 human-era commits from May 2026 carry Claude co-author trailers, all from one engineer. Use of Copilot or Cursor leaves no trace in git and can't be ruled out.</td></tr>
+      <tr><td>Contractors and part-time work</td><td>Either</td><td>Employment type isn't recorded. Engineer-weeks are given as a range for this reason.</td></tr>
+      <tr><td>Most of the gain came before Minions</td><td>Context</td><td>The transition (plain Claude Code) already completed about 22 tickets a week. Credit the jump to AI agents generally, and the further increase to Minions.</td></tr>
+      <tr><td>Director time</td><td><span class="chip fm">MINIONS</span></td><td>Minions output includes a director's hands-on time, which isn't counted as an engineer.</td></tr>
+      <tr><td>Production releases</td><td>Context</td><td>Not used as a productivity measure. Releases are batched on purpose so each one can be tested, and the cadence is similar in both eras (about 0.6 a week). Work in UAT is on dev and goes to production in the next batch.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="literal">
+  <h2>Your literal definition, for completeness</h2>
+  <div class="notes">
+    <p>If the human era runs from 2024 right up to the Minions cutover (2026-08-26), it absorbs the transition. That baseline becomes 121.8 weeks with 437 completed tickets, 529 merged PRs, 3,835 commits, 2,405 test cases and +359,513 source lines. The multipliers shrink to about <b>6.2×</b> completed tickets (on Jira weeks), <b>8.5×</b> PRs merged, <b>3.4×</b> commits, <b>5.1×</b> source lines and <b>63×</b> tests per week <span class="chip es">EST</span>. I don't recommend this framing, because 12 of those weeks were already agent-driven.</p>
+  </div>
+</section>
+
+<section id="method">
+  <h2>Sources</h2>
+  <div class="notes">
+    <p><b>Git:</b> all 37 repositories in the <code>ondeliveri</code> GitHub organization, cloned including every <code>refs/pull/*</code> head so deleted PR branches count (6,513 commits). The monorepo imported the old web app and backend histories, so 2,006 duplicate commits were removed by matching author, subject, date and diff size. "Trunk" means commits reachable from <code>main</code>, <code>master</code>, <code>prod</code>, <code>develop</code>, <code>dev</code> or <code>qa</code>.</p>
+    <p><b>Accounts excluded:</b> <code>github-actions[bot]</code> (4 commits, prod image-tag syncs). No dependabot or other bot accounts exist. The <code>Claude Code</code> git identity (8 commits) is treated as an agent, not a human. Known aliases of the same person were merged before counting people. No individual is named or ranked here.</p>
+    <p><b>GitHub:</b> 780 PRs across all repos, and Actions history for every deploy and promote workflow. <b>Jira:</b> 823 DLC and GEN issues with full status history. A ticket counts as complete at its first move to UAT, or at Done if it skipped UAT. Epics and Won't Do tickets are excluded.</p>
+  </div>
+</section>
+
+</div>
+
+</body></html>
